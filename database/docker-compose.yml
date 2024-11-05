@@ -1,17 +1,21 @@
-version: '3.4'
 services:
   mariadb:
-    image: mysql:8.0 # mariadb:11.5.2
+    image: mariadb
+    restart: always
+
     ports:
       - "13306:3306"
     command:
-      --init-file /data/application/init.sql
+      --init-file=/data/application/init.sql
     environment:
-      MYSQL_ROOT_USER: javafxTest
-      MYSQL_ROOT_PASSWORD: changeme
-      MYSQL_DATABASE: javafxTest
-      MYSQL_USER: javafxTest
-      MYSQL_PASSWORD: changeme
+      MARIADB_DATABASE: kursach
+      MARIADB_USER: javafxTest
+      MARIADB_PASSWORD: changeme
+#    volumes:
+#      - ${PWD}/mariadb:/var/lib/mysql
+#      - D:/IdeaProjects/kursach/database/init.sql:/data/application/init.sql
     volumes:
-      - ${PWD}/mariadb:/var/lib/mysql
-      - ./init.sql:/data/application/init.sql
+      - D:/MariaDBData:/var/lib/mysql
+      - D:/IdeaProjects/kursach/database/init.sql:/data/application/init.sql
+volumes:
+  mariadbvol:
